@@ -8,6 +8,6 @@ import { lgaProviders } from './lga.providers';
     imports: [DatabaseModule],
     controllers: [LgaController],
     providers: [LgaService, ...lgaProviders],
-    exports: [LgaService]
+    exports: [LgaService, ...lgaProviders]
 })
 export class LgaModule { }

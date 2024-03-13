@@ -40,30 +40,26 @@ export class AppController {
 
     @Get('search')
     async search(@Query() query: any) {
-        const { term, category, key } = query
+        const { name, category } = query
         let searchData = null;
         try {
             switch (category) {
                 case 'region':
-                    console.log('=====================> got in here 1');
+                    searchData = await this.regionService.searchRegion(name);
                     break;
                 case 'state':
-                    console.log('=====================> got in here 2');
-
+                    searchData = await this.stateService.searchState(name);
                     break;
                 default:
-                    console.log('=====================> got in here 3');
-
+                    searchData = await this.lgaService.searchLga(name)
             }
-            // const allRegions = await this.regionService.fetchRegions()
-            // const allStates = await this.stateService.fetchAllStates();
-            // const allLgas = await this.lgaService.fetchAll(limit, offset);
             return {
                 success: true,
                 message: 'All data fetched successfully.',
                 data: searchData
             }
         } catch (error) {
+            console.log({ error })
             throw new InternalServerErrorException({
                 success: false,
                 message: 'Request could not be processed, try again later.',

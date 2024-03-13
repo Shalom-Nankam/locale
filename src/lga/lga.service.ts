@@ -25,8 +25,12 @@ export class LgaService {
         return this.lgaModel.findOne({ name }, 'name state_id').exec();
     }
 
-    async searchItem(section: String, term: String): Promise<Lga[]> {
-        const searchField = '' + section;
-        return this.lgaModel.find({ '': term }).exec();
+    async searchLga(term: String): Promise<any> {
+        return this.lgaModel.aggregate([{
+            $match: {
+                name: { $regex: term, '$options': 'i' }
+            }
+        },
+        ]).lookup({ from: 'states', localField: 'state_id', foreignField: 'state_id', as: 'state' })
     }
 }
