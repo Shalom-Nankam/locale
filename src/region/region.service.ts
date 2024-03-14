@@ -13,11 +13,11 @@ export class RegionService {
     }
 
     async fetchRegions(): Promise<Region[]> {
-        return this.region.find({}, '-_id -__v', { sort: 'region_id' })
+        return this.region.find({}, '-_id -__v', { sort: 'region_id' }).exec()
     }
 
     async fetchSingleRegion(region_id: number): Promise<Region> {
-        return this.region.findOne({ region_id }, '-_id -__v')
+        return this.region.findOne({ region_id }, '-_id -__v').exec()
     }
     async searchRegion(name: string): Promise<any> {
         return this.region.aggregate([{ $match: { name: { $regex: name, '$options': 'i' } } }]).lookup({

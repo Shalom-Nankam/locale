@@ -4,7 +4,7 @@ import { AuthGuardGuard } from 'src/auth-guard/auth-guard.guard';
 import { StateDto } from './dto/state.dto';
 
 @Controller('states')
-@UseGuards(AuthGuardGuard)
+// @UseGuards(AuthGuardGuard)
 export class StateController {
     constructor(private readonly stateService: StateService) { }
 

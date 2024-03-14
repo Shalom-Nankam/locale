@@ -9,11 +9,11 @@ export class StateService {
     constructor(@Inject('STATE_MODEL') private readonly stateModel: Model<State>, @Inject('LGA_MODEL') private lgaModel: Model<Lga>) { }
 
     async fetchAllStates(): Promise<State[]> {
-        return this.stateModel.find({}, '-_id, -__v', { sort: 'state_id' })
+        return this.stateModel.find({}, '-_id, -__v', { sort: 'state_id' }).exec()
     }
 
     async fetchStatesInRegion(region_id: number): Promise<State[]> {
-        return this.stateModel.find({ region_id }, '-_id -__v', { sort: 'name' })
+        return this.stateModel.find({ region_id }, '-_id -__v', { sort: 'name' }).exec()
     }
 
     async createState(state: StateDto): Promise<State> {
@@ -21,7 +21,7 @@ export class StateService {
     }
 
     async fetchSingleState(id: number): Promise<State> {
-        const state = this.stateModel.findOne({ state_id: id }, '-_id -__v');
+        const state = this.stateModel.findOne({ state_id: id }, '-_id -__v').exec();
         return state;
     }
 

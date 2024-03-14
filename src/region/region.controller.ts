@@ -13,7 +13,6 @@ export class RegionController {
         console.log({ region })
         try {
             const createdRegion = await this.regionService.createRegion(region);
-            console.log({ createdRegion })
             return {
                 success: true,
                 message: 'Region created successfully.',
