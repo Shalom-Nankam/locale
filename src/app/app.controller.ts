@@ -1,4 +1,4 @@
-import { Controller, Get, InternalServerErrorException, Query, UseGuards } from '@nestjs/common';
+import { Controller, Get, InternalServerErrorException, Query, UnprocessableEntityException, UseGuards } from '@nestjs/common';
 import { AuthGuardGuard } from 'src/auth-guard/auth-guard.guard';
 import { LgaService } from 'src/lga/lga.service';
 import { RegionService } from 'src/region/region.service';
@@ -50,8 +50,11 @@ export class AppController {
                 case 'state':
                     searchData = await this.stateService.searchState(name);
                     break;
-                default:
+                case 'lga':
                     searchData = await this.lgaService.searchLga(name)
+                    break;
+                default:
+                    throw new UnprocessableEntityException()
             }
             return {
                 success: true,
