@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, InternalServerErrorException, Param, UseGu
 import { CreateLgaDto } from './dto/create-lga.dto';
 import { LgaService } from './lga.service';
 import { AuthGuardGuard } from 'src/auth-guard/auth-guard.guard';
-@Controller('lgas')
+@Controller('lga')
 @UseGuards(AuthGuardGuard)
 export class LgaController {
     constructor(private readonly lgaService: LgaService) { }
@@ -17,6 +17,7 @@ export class LgaController {
                 data: newLga
             };
         } catch (error) {
+            console.log({ error })
             throw new InternalServerErrorException({
                 success: false,
                 message: 'An internal server error occured.',

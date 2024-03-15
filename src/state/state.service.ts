@@ -32,9 +32,6 @@ export class StateService {
                     $regex: term,
                     '$options': 'i'
                 },
-                $or: [{
-                    name: term
-                }]
             }
         }]).lookup({
             from: 'lgas',
