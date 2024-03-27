@@ -2,7 +2,7 @@ import { Controller, Get, Post, Body, InternalServerErrorException, Param, UseGu
 import { CreateLgaDto } from './dto/create-lga.dto';
 import { LgaService } from './lga.service';
 import { AuthGuardGuard } from 'src/auth-guard/auth-guard.guard';
-@Controller('lga')
+@Controller('lgas')
 @UseGuards(AuthGuardGuard)
 export class LgaController {
     constructor(private readonly lgaService: LgaService) { }
